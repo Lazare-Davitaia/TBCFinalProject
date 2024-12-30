@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{%block body%}
+
+    <style>
+        .hero {
+            background: url('https://a.storyblok.com/f/90801/1920x600/b5b0eba700/university.png/m/') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            rounded
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin: 20px 0;
+        }
+        .hero .btn {
+            margin-top: 20px;
+        }
+        .feature-section {
+            padding: 50px 20px;
+        }
+        .feature {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .feature img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Discover the Best Universities</h1>
+            <p>Your guide to finding the top universities, and resources for your future.</p>
+            <a href="{{url_for('ranking')}}" class="btn btn-primary btn-lg">Explore Rankings</a>
+            <a href="{{url_for('news_page')}}" class="btn btn-outline-light btn-lg">View news</a>
+        </div>
+    </div>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2  href="{{url_for('ranking')}}" class="text-center mb-5">Why Choose Us?</h2>
+            <div class="row">
+                <div class="col-md-4 feature">
+                    <img class="rounded" src="https://res.cloudinary.com/highereducation/images/c_fill,f_auto,fl_lossy,q_auto,g_center,w_112,h_112/v1709238311/BestColleges.com/university-of-california-sign/university-of-california-sign.jpg?_i=AA" alt="Feature 1">
+                    <h5>Comprehensive Rankings</h5>
+                    <p>Explore in-depth rankings to help you make the best decision for your education.</p>
+                </div>
+                <div class="col-md-4 feature">
+                    <img class="rounded" src="https://res.cloudinary.com/highereducation/images/c_fill,f_auto,fl_lossy,q_auto,g_center,w_112,h_112/v1733335008/BestColleges.com/programmers-tech-startup-office_101573bada6/programmers-tech-startup-office_101573bada6.jpg?_i=AA" alt="Feature 2">
+                    <h5>Trusted Resources</h5>
+                    <p>Access reliable tools and guides to navigate your academic journey.</p>
+                </div>
+                <div class="col-md-4 feature rounded">
+                    <img class= rounded src="https://res.cloudinary.com/highereducation/images/c_fill,f_auto,fl_lossy,q_auto,g_center,w_112,h_112/v1733438765/BestColleges.com/student-wearing-graduation-gown/student-wearing-graduation-gown.jpg?_i=AA" alt="Feature 3">
+                    <h5>Expert Advice</h5>
+                    <p>Get tips and insights from professionals in the education industry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+{%endblock%}

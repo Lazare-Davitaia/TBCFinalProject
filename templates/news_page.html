@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container shadow-lg rounded p-3 mt-3 bg-dark-subtle">
+    <h1 class="page-title text-center my-4">Latest News</h1>
+
+    {% for item in news %}
+    <div class="news-item bg-light p-3 mb-4 rounded shadow d-flex flex-column flex-md-row align-items-start">
+        <img src="{{ url_for('static', filename=item.image) }}" alt="News Image" class="img-fluid rounded mb-3 mb-md-0" style="width: 400px; height: 400px; object-fit: cover;">
+
+        <div class="news-content ms-3">
+            <h2 class="news-title fw-bold">{{ item.title }}</h2>
+            <p>{{ item.content }}</p>
+            <small class="text-muted">Published on: {{ item.date }}</small>
+            <button
+                class="like-btn btn btn-outline-primary btn-sm mt-2"
+                data-news-id="{{ item.id }}">
+                ❤️ {{ item.likes|length }}
+            </button>
+
+            {% if current_user.is_authenticated and current_user.email == 'Lazare26davitaia@gmail.com' %}
+            <div class="mt-3">
+                <a href="{{ url_for('edit_news', news_id=item.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                <form action="{{ url_for('delete_news', news_id=item.id) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+
+{% if current_user.is_authenticated and current_user.email == 'Lazare26davitaia@gmail.com' %}
+<div class="container mt-3">
+    <a href="{{ url_for('add_news') }}" class="btn btn-primary btn-lg">Add News</a>
+</div>
+{% endif %}
+
+<!-- JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.like-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const newsId = this.getAttribute('data-news-id');
+            fetch(`/like/${newsId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.innerText = `❤️ ${data.likes}`;
+            })
+            .catch(err => console.error(err));
+        });
+    });
+});
+</script>
+
+{% endblock %}
